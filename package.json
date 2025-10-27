@@ -1,0 +1,26 @@
+{
+  "name": "hyperledger-fabric-client",
+  "version": "1.0.0",
+  "description": "Web application for Hyperledger Fabric - Cross-platform compatible",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "enroll": "node enrol.js",
+    "register": "node registerUser.js"
+  },
+  "keywords": [
+    "hyperledger",
+    "fabric",
+    "blockchain",
+    "client",
+    "web-app"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2",
+    "fabric-ca-client": "^2.2.20",
+    "fabric-network": "^2.2.20"
+  }
+}

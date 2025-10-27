@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hyperledger Fabric Client</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>🔗 Hyperledger Fabric Client</h1>
+        <p>Manage blockchain identities and assets</p>
+      </header>
+
+      <!-- Wallet Status Section -->
+      <section class="card">
+        <h2>📱 Wallet Status</h2>
+        <div class="status-container">
+          <div class="status-item">
+            <span class="label">Admin:</span>
+            <span id="admin-status" class="status pending">Checking...</span>
+          </div>
+          <div class="status-item">
+            <span class="label">App User:</span>
+            <span id="user-status" class="status pending">Checking...</span>
+          </div>
+        </div>
+        <button onclick="checkWalletStatus()" class="btn btn-secondary">
+          🔄 Refresh Status
+        </button>
+      </section>
+
+      <!-- Enrollment Section -->
+      <section class="card">
+        <h2>👤 User Management</h2>
+        <div class="button-group">
+          <button onclick="enrollAdmin()" class="btn btn-primary">
+            <span class="btn-icon">🔐</span>
+            Enroll Admin
+          </button>
+          <button onclick="registerUser()" class="btn btn-primary">
+            <span class="btn-icon">➕</span>
+            Register App User
+          </button>
+        </div>
+        <div id="enrollment-message" class="message"></div>
+      </section>
+
+      <!-- Query Assets Section -->
+      <section class="card">
+        <h2>🔍 Query Assets</h2>
+        <button onclick="queryAssets()" class="btn btn-success">
+          <span class="btn-icon">📊</span>
+          Get All Assets
+        </button>
+        <div id="query-result" class="result-container"></div>
+      </section>
+
+      <!-- Create Asset Section -->
+      <section class="card">
+        <h2>➕ Create New Asset</h2>
+        <form id="asset-form" onsubmit="createAsset(event)">
+          <div class="form-group">
+            <label for="asset-id">Asset ID:</label>
+            <input
+              type="text"
+              id="asset-id"
+              placeholder="e.g., asset1"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="asset-color">Color:</label>
+            <input
+              type="text"
+              id="asset-color"
+              placeholder="e.g., blue"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="asset-size">Size:</label>
+            <input
+              type="number"
+              id="asset-size"
+              placeholder="e.g., 5"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="asset-owner">Owner:</label>
+            <input
+              type="text"
+              id="asset-owner"
+              placeholder="e.g., Tom"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="asset-value">Appraised Value:</label>
+            <input
+              type="number"
+              id="asset-value"
+              placeholder="e.g., 300"
+              required
+            />
+          </div>
+          <button type="submit" class="btn btn-primary">
+            <span class="btn-icon">💾</span>
+            Create Asset
+          </button>
+        </form>
+        <div id="create-message" class="message"></div>
+      </section>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
