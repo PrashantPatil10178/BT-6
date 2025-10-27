@@ -1,0 +1,48 @@
+# Ignore files for Docker buildnode_modules
+
+npm-debug.log
+
+# Dependencies.git
+
+node_modules/.gitignore
+
+npm-debug.logREADME.md
+
+package-lock.json.env
+
+pnpm-lock.yaml.DS_Store
+
+wallet/*.id
+
+# Runtime generatedpnpm-lock.yaml
+
+wallet/
+connection-org1.json
+
+# Git
+.git/
+.gitignore
+
+# Documentation
+*.md
+!README.md
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+
+# Test files
+*.test.js
+test/
+
+# Windows batch files (not needed in container)
+*.bat

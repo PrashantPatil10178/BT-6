@@ -30,11 +30,13 @@ Before uploading to GitHub, verify this checklist:
 When someone clones your repo, they need to:
 
 1. **Install Dependencies**
+
    ```bash
    npm install
    ```
 
 2. **Setup Fabric Network** (separate from this repo)
+
    ```bash
    cd ..
    curl -sSL https://raw.githubusercontent.com/hyperledger/fabric/main/scripts/install-fabric.sh | bash -s -- binary samples
@@ -44,6 +46,7 @@ When someone clones your repo, they need to:
    ```
 
 3. **Copy Connection Profile**
+
    ```bash
    cp organizations/peerOrganizations/org1.example.com/connection-org1.json ../../client/
    cd ../../client
