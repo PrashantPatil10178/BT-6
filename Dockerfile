@@ -13,7 +13,7 @@ RUN apk add --no-cache bash curl
 COPY package*.json ./
 
 # Install Node.js dependencies
-RUN npm ci --only=production && npm cache clean --force
+RUN npm install --production && npm cache clean --force
 
 # Copy application source code
 COPY server.js enrol.js registerUser.js ./

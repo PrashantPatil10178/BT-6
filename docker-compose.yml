@@ -1,7 +1,5 @@
 # Docker Compose for Hyperledger Fabric Client
 
-version: "3.8"
-
 networks:
   test:
     name: fabric_test
@@ -27,10 +25,10 @@ services:
       - NODE_ENV=production
       - PORT=3000
     volumes:
-      # Mount connection profile from host
-      - ./connection-org1.json:/app/connection-org1.json:ro
       # Persist wallet between restarts
       - fabric-wallet:/app/wallet
+      # Uncomment when connection-org1.json is available:
+      # - ./connection-org1.json:/app/connection-org1.json:ro
     networks:
       - test
     restart: unless-stopped

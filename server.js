@@ -13,6 +13,60 @@ app.use(express.json());
 app.use(express.static("public"));
 
 const ccpPath = path.resolve(__dirname, "connection-org1.json");
+
+// Create default connection profile if it doesn't exist
+if (!fs.existsSync(ccpPath)) {
+  const defaultCcp = {
+    name: "test-network-org1",
+    version: "1.0.0",
+    client: {
+      organization: "Org1",
+      connection: {
+        timeout: {
+          peer: {
+            endorser: "300",
+          },
+        },
+      },
+    },
+    organizations: {
+      Org1: {
+        mspid: "Org1MSP",
+        peers: ["peer0.org1.example.com"],
+        certificateAuthorities: ["ca.org1.example.com"],
+      },
+    },
+    peers: {
+      "peer0.org1.example.com": {
+        url: "grpcs://peer0.org1.example.com:7051",
+        tlsCACerts: {
+          pem: "-----BEGIN CERTIFICATE-----\n(placeholder)\n-----END CERTIFICATE-----",
+        },
+        grpcOptions: {
+          "ssl-target-name-override": "peer0.org1.example.com",
+          hostnameOverride: "peer0.org1.example.com",
+        },
+      },
+    },
+    certificateAuthorities: {
+      "ca.org1.example.com": {
+        url: "https://ca.org1.example.com:7054",
+        caName: "ca-org1",
+        tlsCACerts: {
+          pem: [
+            "-----BEGIN CERTIFICATE-----\n(placeholder)\n-----END CERTIFICATE-----",
+          ],
+        },
+        httpOptions: {
+          verify: false,
+        },
+      },
+    },
+  };
+  fs.writeFileSync(ccpPath, JSON.stringify(defaultCcp, null, 2));
+  console.log("✅ Created default connection-org1.json");
+}
+
 const ccp = JSON.parse(fs.readFileSync(ccpPath, "utf8"));
 const walletPath = path.join(process.cwd(), "wallet");
 
