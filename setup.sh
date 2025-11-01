@@ -34,9 +34,6 @@ echo "IMPORTANT: Applying Docker group permissions..."
 echo "This script will now restart in a new shell with Docker permissions."
 echo "==================================================================="
 
-# This is the magic part:
-# 'newgrp docker' starts a new sub-shell with the 'docker' group permissions.
-# The '<< EOF' block sends all the following commands into that new shell.
 newgrp docker << EOF
 
 set -e # Re-enable 'exit on error' for the new sub-shell
@@ -49,29 +46,24 @@ echo "Docker version: $(docker --version)"
 echo "Docker Compose version: $(docker-compose --version)"
 
 echo "📥 Downloading Hyperledger Fabric samples and binaries..."
-# This script downloads the fabric-samples repo
 curl -sSL https://bit.ly/2ysbOFE | bash -s
 
 cd fabric-samples/test-network
 
 echo "Unix-ifying scripts (running dos2unix)..."
-# This is the fix! Run dos2unix on the scripts.
 dos2unix ./network.sh
-
-
 
 echo "🧹 Cleaning up existing network..."
 ./network.sh down
 
-echo "🚀 Starting Fabric network and creating channel..."
-./network.sh up createChannel -ca
+echo "🚀 Starting Fabric network and creating channel named 'channel'..."
+./network.sh up createChannel -c channel
 
-echo "📦 Deploying basic chaincode..."
-./network.sh deployCC -ccn basic -ccp ../asset-transfer-basic/chaincode-javascript -ccl javascript
+echo "📦 Deploying basic chaincode to channel 'channel'..."
+./network.sh deployCC -ccn basic -ccp ../asset-transfer-basic/chaincode-javascript -ccl javascript -c channel
 
-echo "✅ Setup complete! The Fabric network is up and running."
+echo "✅ Setup complete! The Fabric network is up and running on channel 'channel'."
 
 EOF
-# End of the newgrp block
 
 echo "🎉 All done."
